@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class SearchBar extends Component {
-  state = { businesses: [] };
   constructor(props) {
     super(props);
     this.state = {
       searchItem: '',
-      userLocation: ''
+      userLocation: '',
+      businesses: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
@@ -31,13 +31,13 @@ class SearchBar extends Component {
           location: userLocation
         },
         headers: {
-          Authorization: 'Bearer API-Key'
+          Authorization: 'Bearer API KEY'
         }
       }
     );
+
     this.setState({ businesses: response.data.businesses });
   };
-
   render() {
     return (
       <form onSubmit={this.onSearchSubmit}>
@@ -47,7 +47,7 @@ class SearchBar extends Component {
             aria-label="searchItem"
             name="searchItem"
             className="form-control"
-            placeholder="Tacos, brewery, etc..."
+            placeholder="Tacos, pizza, etc..."
             value={this.state.value}
             onChange={this.handleChange}
           />
@@ -65,7 +65,6 @@ class SearchBar extends Component {
               type="submit"
               value="Search"
               className="btn btn-outline input-group-text"
-              onClick={this.onSearchSubmit}
             />
           </div>
         </div>

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 import SearchBar from './SearchBar';
 
@@ -5,6 +6,7 @@ class Header extends Component {
   render() {
     return (
       <div className="container-fluid">
+        <div>{this.props.businesses}</div>
         <div className="jumbotron">
           Welp.
           <br />
