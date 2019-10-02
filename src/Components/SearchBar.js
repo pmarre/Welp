@@ -31,7 +31,8 @@ class SearchBar extends Component {
           location: userLocation
         },
         headers: {
-          Authorization: 'Bearer API KEY'
+          Authorization:
+            'Bearer BSHoa-Ky4u-KV6x0BAMflZXlUc480GhS-AMMDw9W5TJr3QZm6bjozXdrUOM8BF7AQeT7JJnfws4GDFJK3iEk67lin_xbU7Tp8oNeeDa1YWqobPHRd82lupSr2vGIXXYx'
         }
       }
     );
@@ -46,7 +47,7 @@ class SearchBar extends Component {
             type="text"
             aria-label="searchItem"
             name="searchItem"
-            className="form-control"
+            className="form-control search"
             placeholder="Tacos, pizza, etc..."
             value={this.state.value}
             onChange={this.handleChange}

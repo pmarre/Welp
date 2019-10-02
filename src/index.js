@@ -1,23 +1,35 @@
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import $ from 'jquery';
-import Popper from 'popper.js';
+
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles.css';
+import { combineReducers, createStore } from 'redux';
+import { Provider } from 'react-redux';
+import userReducer from './Reducers/UserReducer';
+import productsReducer from './Reducers/ProductReducers.js';
 
-import PageContainer from './container/PageContainer';
+import App from './App';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <PageContainer />
-      </div>
-    );
-  }
-}
+const allReducers = combineReducers({
+  searchItem: productsReducer,
+  userLocation: userReducer
+});
+
+const store = createStore(
+  allReducers,
+  {
+    searchItem: 'Tacos',
+    userLocation: 'San Francisco, CA'
+  },
+  window.window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    window.window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 const rootElement = document.getElementById('root');
-ReactDOM.render(<App />, rootElement);
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  rootElement
+);
