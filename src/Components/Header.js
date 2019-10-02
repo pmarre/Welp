@@ -1,6 +1,5 @@
-import axios from 'axios';
-import React, { Component } from 'react';
-import SearchBar from './SearchBar';
+import React, { Component } from "react";
+import SearchBar from "./SearchBar";
 
 class Header extends Component {
   render() {
