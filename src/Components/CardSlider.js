@@ -17,13 +17,13 @@ class CardSlider extends Component {
               <div className="col-xs-12 text-md-right lead">
                 <a
                   className="btn btn-outline-secondary prev"
-                  href=""
+                  href="https://www.google.com"
                   title="go back">
                   <i className="fa fa-lg fa-chevron-left" />
                 </a>
                 <a
                   className="btn btn-outline-secondary next"
-                  href=""
+                  href="https://www.google.com"
                   title="more">
                   <i className="fa fa-lg fa-chevron-right" />
                 </a>
@@ -44,7 +44,9 @@ class CardSlider extends Component {
                   <div className="card-block p-t-2">
                     <h6 className="small text-wide p-b-2">Insight</h6>
                     <h2>
-                      <a href="#">Why Stuff Happens Every Year.</a>
+                      <a href="https://www.google.com">
+                        Why Stuff Happens Every Year.
+                      </a>
                     </h2>
                   </div>
                 </div>
@@ -61,7 +63,9 @@ class CardSlider extends Component {
                   <div className="card-block p-t-2">
                     <h6 className="small text-wide p-b-2">Development</h6>
                     <h2>
-                      <a href>How to Make Every Line Count.</a>
+                      <a href="https://www.google.com">
+                        How to Make Every Line Count.
+                      </a>
                     </h2>
                   </div>
                 </div>
@@ -97,7 +101,9 @@ class CardSlider extends Component {
                   <div className="card-block p-t-2">
                     <h6 className="small text-wide p-b-2">Another</h6>
                     <h2>
-                      <a href>Tagline or Call-to-action.</a>
+                      <a href="https://www.google.com">
+                        Tagline or Call-to-action.
+                      </a>
                     </h2>
                   </div>
                 </div>
@@ -116,7 +122,7 @@ class CardSlider extends Component {
                       <span className="pull-xs-right">12.04</span> Category 1
                     </h6>
                     <h2>
-                      <a href>This is a Blog Title.</a>
+                      <a href="https://www.google.com">This is a Blog Title.</a>
                     </h2>
                   </div>
                 </div>
@@ -133,7 +139,9 @@ class CardSlider extends Component {
                   <div className="card-block p-t-2">
                     <h6 className="small text-wide p-b-2">Category 3</h6>
                     <h2>
-                      <a href>Catchy Title of a Blog Post.</a>
+                      <a href="https://www.google.com">
+                        Catchy Title of a Blog Post.
+                      </a>
                     </h2>
                   </div>
                 </div>
