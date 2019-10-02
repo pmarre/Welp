@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { updateUserLocation } from './Actions/UserActions';
+import { updateUserLocation } from './actions/UserActions';
+import Navigation from './components/Navigation';
+import BusinessList from './components/BusinessList';
+import Header from './components/Header';
 
 class App extends Component {
   constructor(props) {
@@ -14,26 +18,40 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="App">
-        <div>Container</div>
-        <input onChange={this.onUpdateUserLocation} />
-        {this.props.userLocation}
+        <Navigation />
+        <Header />
+        <BusinessList />
       </div>
     );
   }
 }
-const mapStateToProps = state => ({
-  searchItem: state.searchItem,
-  userLocation: state.userLocation
-});
+const mapStateToProps = (state, props) => {
+  return {
+    searchItem: state.searchItem,
+    userLocation: state.userLocation,
+    locationPlusSearch: `${state.userLocation} ${props.randomProp}`
+  };
+};
 
-const mapActionsToProps = {
-  onUpdateUserLocation: updateUserLocation
+const mapActionsToProps = (dispatch, props) => {
+  console.log(props);
+  return bindActionCreators(
+    {
+      onUpdateUserLocation: updateUserLocation
+    },
+    dispatch
+  );
+};
+
+const mergeProps = (propsFromState, propsFromDispatch, ownProps) => {
+  console.log(propsFromState, propsFromDispatch, ownProps);
+  return {};
 };
 
 export default connect(
   mapStateToProps,
-  mapActionsToProps
+  mapActionsToProps,
+  mergeProps
 )(App);

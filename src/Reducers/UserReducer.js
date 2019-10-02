@@ -1,7 +1,4 @@
-import {
-  updateUserLocation,
-  UPDATE_USER_LOCATION
-} from '../Actions/UserActions';
+import { UPDATE_USER_LOCATION } from '../actions/UserActions';
 
 export default function userReducer(state = '', { type, payload }) {
   switch (type) {

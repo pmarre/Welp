@@ -6,8 +6,8 @@ import ReactDOM from 'react-dom';
 import './styles.css';
 import { combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
-import userReducer from './Reducers/UserReducer';
-import productsReducer from './Reducers/ProductReducers.js';
+import userReducer from './reducers/UserReducer';
+import productsReducer from './reducers/ProductReducers.js';
 
 import App from './App';
 
@@ -29,7 +29,7 @@ const store = createStore(
 const rootElement = document.getElementById('root');
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App randomProp="whatever" />
   </Provider>,
   rootElement
 );

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { updateUserLocation } from '../actions/UserActions';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -36,10 +39,10 @@ class SearchBar extends Component {
         }
       }
     );
-
     this.setState({ businesses: response.data.businesses });
   };
   render() {
+    console.log(this.props, 'searchbar');
     return (
       <form onSubmit={this.onSearchSubmit}>
         <div className="input-group">
@@ -75,4 +78,31 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar;
+const mapStateToProps = (state, props) => {
+  return {
+    searchItem: state.searchItem,
+    userLocation: state.userLocation,
+    locationPlusSearch: `${state.userLocation} ${props.randomProp}`
+  };
+};
+
+const mapActionsToProps = (dispatch, props) => {
+  console.log(props);
+  return bindActionCreators(
+    {
+      onUpdateUserLocation: updateUserLocation
+    },
+    dispatch
+  );
+};
+
+const mergeProps = (propsFromState, propsFromDispatch, ownProps) => {
+  console.log(propsFromState, propsFromDispatch, ownProps);
+  return {};
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps,
+  mergeProps
+)(SearchBar);
