@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Card from './Card';
+import PropTypes from 'prop-types';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -11,6 +13,12 @@ class SearchBar extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
+  }
+
+  fromChild1(params) {
+    this.setState({
+      businesses: params
+    });
   }
 
   handleChange = event => {
@@ -31,13 +39,16 @@ class SearchBar extends Component {
           location: userLocation
         },
         headers: {
-          Authorization: 'Bearer API KEY'
+          Authorization:
+            'Bearer BSHoa-Ky4u-KV6x0BAMflZXlUc480GhS-AMMDw9W5TJr3QZm6bjozXdrUOM8BF7AQeT7JJnfws4GDFJK3iEk67lin_xbU7Tp8oNeeDa1YWqobPHRd82lupSr2vGIXXYx'
         }
       }
     );
 
     this.setState({ businesses: response.data.businesses });
+    this.id = this.state.businesses.map(item => item.id);
   };
+
   render() {
     return (
       <form onSubmit={this.onSearchSubmit}>
@@ -69,6 +80,7 @@ class SearchBar extends Component {
           </div>
         </div>
         <div>Found {this.state.businesses.length} restaurants</div>
+        <Card {...this.state} onSubmit={this.onSearchSubmit.bind(this)} />
       </form>
     );
   }
