@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Card from './Card';
-import PropTypes from 'prop-types';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -47,41 +46,44 @@ class SearchBar extends Component {
 
     this.setState({ businesses: response.data.businesses });
     this.id = this.state.businesses.map(item => item.id);
+    console.log(this.state.businesses);
   };
 
   render() {
     return (
-      <form onSubmit={this.onSearchSubmit}>
-        <div className="input-group">
-          <input
-            type="text"
-            aria-label="searchItem"
-            name="searchItem"
-            className="form-control"
-            placeholder="Tacos, pizza, etc..."
-            value={this.state.value}
-            onChange={this.handleChange}
-          />
-          <input
-            type="text"
-            aria-label="userLocation"
-            name="userLocation"
-            className="form-control"
-            placeholder="San Francisco, CA"
-            value={this.state.value}
-            onChange={this.handleChange}
-          />
-          <div className="input-group-append">
+      <div>
+        <form onSubmit={this.onSearchSubmit}>
+          <div className="input-group">
             <input
-              type="submit"
-              value="Search"
-              className="btn btn-outline input-group-text"
+              type="text"
+              aria-label="searchItem"
+              name="searchItem"
+              className="form-control"
+              placeholder="Tacos, pizza, etc..."
+              value={this.state.value}
+              onChange={this.handleChange}
             />
+            <input
+              type="text"
+              aria-label="userLocation"
+              name="userLocation"
+              className="form-control"
+              placeholder="San Francisco, CA"
+              value={this.state.value}
+              onChange={this.handleChange}
+            />
+            <div className="input-group-append">
+              <input
+                type="submit"
+                value="Search"
+                className="btn btn-outline input-group-text"
+              />
+            </div>
           </div>
-        </div>
-        <div>Found {this.state.businesses.length} restaurants</div>
+          <div>Found {this.state.businesses.length} restaurants in </div>
+        </form>
         <Card {...this.state} onSubmit={this.onSearchSubmit.bind(this)} />
-      </form>
+      </div>
     );
   }
 }
