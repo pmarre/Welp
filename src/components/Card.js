@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import StarRatings from 'react-star-ratings';
+import { Link } from 'react-router-dom';
 
 class Card extends Component {
   constructor(props) {
@@ -38,14 +39,14 @@ class Card extends Component {
             />
             <p className="card-subtitle mt-1"></p>
             <p className="card-text">{business.location.display_address[1]}</p>
-            <a href={business.url} className="btn btn-primary" target="blank">
-              Go to Website
-            </a>
+            <Link to={business.alias} className="btn btn-primary">
+              More info
+            </Link>
           </div>
         </div>
       </div>
     ));
-    return <div className="row">{renderList}</div>;
+    return <div className="row justify-content-center">{renderList}</div>;
   }
 }
 

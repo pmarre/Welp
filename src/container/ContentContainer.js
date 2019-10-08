@@ -7,9 +7,27 @@ class ContentContainer extends Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    this.setState({
+      searchItem: this.props.searchItem,
+      userLocation: this.props.userLocation,
+      businesses: this.props.businesses
+    });
+  }
+
+  onMoreDetail(id) {}
+
   render() {
-    console.log(this.state);
-    return <Card {...this.state} />;
+    let businesses = this.props.businesses;
+    console.log(businesses);
+    if (businesses == null) {
+      return null;
+    }
+    return (
+      <div className="container-fluid justify-content-center">
+        <Card businesses={this.props.businesses} />
+      </div>
+    );
   }
 }
 

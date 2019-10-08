@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Card from './Card';
+import ContentContainer from '../container/ContentContainer';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -12,12 +12,6 @@ class SearchBar extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
-  }
-
-  fromChild1(params) {
-    this.setState({
-      businesses: params
-    });
   }
 
   handleChange = event => {
@@ -85,9 +79,10 @@ class SearchBar extends Component {
             </form>
           </div>
         </div>
-        <div className="container-fluid justify-self-center">
-          <Card {...this.state} onSubmit={this.onSearchSubmit.bind(this)} />
-        </div>
+        <ContentContainer
+          {...this.state}
+          onSubmit={this.onSearchSubmit.bind(this)}
+        />
       </div>
     );
   }
