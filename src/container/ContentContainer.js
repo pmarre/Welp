@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import Card from '../components/Card';
+import DetailView from '../components/DetailView';
 
 class ContentContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      clickId: ''
+    };
   }
 
   componentDidMount() {
@@ -15,17 +18,24 @@ class ContentContainer extends Component {
     });
   }
 
-  onMoreDetail(id) {}
+  getBusinessId = idFromChild => {
+    this.setState({
+      clickId: idFromChild
+    });
+  };
 
   render() {
     let businesses = this.props.businesses;
-    console.log(businesses);
     if (businesses == null) {
       return null;
     }
     return (
       <div className="container-fluid justify-content-center">
-        <Card businesses={this.props.businesses} />
+        <Card
+          businesses={this.props.businesses}
+          callbackFromParent={this.getBusinessId}
+        />
+        <DetailView info={this.state.clickId} />
       </div>
     );
   }

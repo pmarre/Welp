@@ -6,7 +6,13 @@ class Card extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.onClickMoreInfo = this.onClickMoreInfo.bind(this);
   }
+
+  onClickMoreInfo = e => {
+    let info = e.target.id;
+    this.props.callbackFromParent(info);
+  };
 
   render() {
     let businesses = this.props.businesses;
@@ -39,7 +45,11 @@ class Card extends Component {
             />
             <p className="card-subtitle mt-1"></p>
             <p className="card-text">{business.location.display_address[1]}</p>
-            <Link to={business.alias} className="btn btn-primary">
+            <Link
+              onClick={this.onClickMoreInfo}
+              to={business.alias}
+              className="btn btn-primary"
+              id={business.id}>
               More info
             </Link>
           </div>
