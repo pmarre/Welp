@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import StarRatings from 'react-star-ratings';
+import $ from 'jquery';
 import { Link } from 'react-router-dom';
 
 class Card extends Component {
@@ -11,6 +12,8 @@ class Card extends Component {
 
   onClickMoreInfo = e => {
     let info = e.target.id;
+    let businessCard = $('.businessCard');
+    businessCard.css('display', 'none');
     this.props.callbackFromParent(info);
   };
 
@@ -22,7 +25,7 @@ class Card extends Component {
 
     let renderList = businesses.map(business => (
       <div
-        className="col-xs-12 col-sm-6 col-lg-4 card-deck mb-3"
+        className="col-xs-12 col-sm-6 col-lg-4 card-deck mb-3 businessCard"
         key={business.id}>
         <div
           className="business-card card text-center"
