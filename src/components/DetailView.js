@@ -5,13 +5,14 @@ import DetailViewCard from './DetailViewCard';
 class DetailView extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      show: false
+    };
     this.onDetailChange = this.onDetailChange.bind(this);
   }
 
-  onDetailChange = async e => {
-    e.preventDefault();
-    let businessId = this.props.info;
+  onDetailChange = async id => {
+    let businessId = id;
     const response = await axios.get(
       `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/${businessId}`,
       {
@@ -21,23 +22,29 @@ class DetailView extends Component {
         }
       }
     );
-
-    this.setState({ businessDetail: response.data });
+    this.setState({ businessDetail: response.data, show: true });
     console.log(this.state.businessDetail);
   };
 
-  render() {
-    if (this.props.info !== '') {
-      console.log('worked');
+  getShowStatus = status => {
+    this.setState({
+      show: status
+    });
+  };
 
-      console.log(this.props);
+  render() {
+    if (this.props.info !== '' && this.state.show === true) {
       return (
-        <div onClick={this.onDetailChange}>
-          <DetailViewCard {...this.state} {...this.props} />
+        <div>
+          <DetailViewCard
+            {...this.state}
+            {...this.props}
+            callbackFromParent={this.getShowStatus}
+          />
         </div>
       );
     } else {
-      return <div onClick={this.onDetailChange}>Empty</div>;
+      return <div></div>;
     }
   }
 }

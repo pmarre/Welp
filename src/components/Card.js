@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import StarRatings from 'react-star-ratings';
 import $ from 'jquery';
 import { Link } from 'react-router-dom';
+import DetailView from './DetailView';
 
 class Card extends Component {
   constructor(props) {
@@ -12,9 +13,12 @@ class Card extends Component {
 
   onClickMoreInfo = e => {
     let info = e.target.id;
+    let detail = $('.detail');
     let businessCard = $('.businessCard');
     businessCard.css('display', 'none');
+    detail.css('display', 'block');
     this.props.callbackFromParent(info);
+    this.refs.child.onDetailChange(info);
   };
 
   render() {
@@ -59,7 +63,12 @@ class Card extends Component {
         </div>
       </div>
     ));
-    return <div className="row justify-content-center">{renderList}</div>;
+    return (
+      <div className="test-container">
+        <div className="row justify-content-center">{renderList}</div>
+        <DetailView ref="child" />
+      </div>
+    );
   }
 }
 

@@ -12,6 +12,22 @@ class SearchBar extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
+    this.getUserLocation = this.getUserLocation.bind(this);
+  }
+
+  getUserLocation = () => {
+    if (this.props.lat == null || this.props.long == null) {
+      this.setState({ userLocation: 'San Francisco, CA' });
+    } else {
+      this.setState({
+        userLocation: this.props.lat + ', ' + this.props.long
+      });
+    }
+    console.log(this.props.lat);
+  };
+
+  componentDidMount() {
+    setTimeout(this.getUserLocation(), 5000);
   }
 
   handleChange = event => {
@@ -54,7 +70,7 @@ class SearchBar extends Component {
                   aria-label="searchItem"
                   name="searchItem"
                   className="form-control"
-                  placeholder="Tacos, pizza, etc..."
+                  placeholder="Tacos, barber, plumber, brewery..."
                   value={this.state.value}
                   onChange={this.handleChange}
                 />
@@ -64,7 +80,7 @@ class SearchBar extends Component {
                   name="userLocation"
                   className="form-control"
                   placeholder="San Francisco, CA"
-                  value={this.state.value}
+                  value={this.state.userLocation}
                   onChange={this.handleChange}
                 />
                 <div className="input-group-append">
@@ -75,7 +91,6 @@ class SearchBar extends Component {
                   />
                 </div>
               </div>
-              <div>Found {this.state.businesses.length} restaurants</div>
             </form>
           </div>
         </div>

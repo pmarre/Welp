@@ -35,7 +35,7 @@ class ContentContainer extends Component {
           businesses={this.props.businesses}
           callbackFromParent={this.getBusinessId}
         />
-        <DetailView info={this.state.clickId} />
+        <DetailView info={this.state.clickId} ref="sibling" />
       </div>
     );
   }
