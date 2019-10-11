@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import StarRatings from 'react-star-ratings';
 import $ from 'jquery';
-import { Link } from 'react-router-dom';
 import DetailView from './DetailView';
 
 class Card extends Component {
@@ -13,9 +12,12 @@ class Card extends Component {
 
   onClickMoreInfo = e => {
     let info = e.target.id;
+    console.log(info);
     let detail = $('.detail');
+    let hero = $('.home-hero-img');
     let businessCard = $('.businessCard');
     businessCard.css('display', 'none');
+    hero.css('display', 'none');
     detail.css('display', 'block');
     this.props.callbackFromParent(info);
     this.refs.child.onDetailChange(info);
@@ -31,16 +33,18 @@ class Card extends Component {
       <div
         className="col-xs-12 col-sm-6 col-lg-4 card-deck mb-3 businessCard"
         key={business.id}>
-        <div
-          className="business-card card text-center"
-          style={{ width: 18 + 'rem' }}>
+        <div className="business-card card" style={{ width: 18 + 'rem' }}>
+          <div
+            className="clickable-card"
+            id={business.id}
+            onClick={this.onClickMoreInfo}></div>
           <img
             src={business.image_url}
             className="card-img-top"
             alt={business.name}
             style={{ width: 100 + '%', height: 15 + 'vw', objectFit: 'cover' }}
           />
-          <div className="card-body">
+          <div className="card-body ">
             <h5 className="card-title">{business.name}</h5>
             <p className="card-subtitle">{business.price}</p>
             <StarRatings
@@ -50,15 +54,11 @@ class Card extends Component {
               name="rating"
               starDimension="20px"
             />
+            <p className="card-subtitle mt-1">
+              {business.review_count} reviews
+            </p>
             <p className="card-subtitle mt-1"></p>
             <p className="card-text">{business.location.display_address[1]}</p>
-            <Link
-              onClick={this.onClickMoreInfo}
-              to={business.alias}
-              className="btn btn-primary"
-              id={business.id}>
-              More info
-            </Link>
           </div>
         </div>
       </div>

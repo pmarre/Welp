@@ -14,12 +14,14 @@ class App extends Component {
       lat: null
     };
   }
+
   render() {
     window.navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({
           long: position.coords.longitude,
-          lat: position.coords.latitude
+          lat: position.coords.latitude,
+          status: true
         });
       },
       err => console.log(err)
@@ -28,7 +30,7 @@ class App extends Component {
     return (
       <div className="wrapper">
         <Navigation />
-        <SearchBar {...this.state} />
+        <SearchBar {...this.state} call />
       </div>
     );
   }

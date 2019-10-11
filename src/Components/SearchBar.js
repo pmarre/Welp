@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import $ from 'jquery';
 import ContentContainer from '../container/ContentContainer';
 
 class SearchBar extends Component {
@@ -23,11 +24,12 @@ class SearchBar extends Component {
         userLocation: this.props.lat + ', ' + this.props.long
       });
     }
+
     console.log(this.props.lat);
   };
 
   componentDidMount() {
-    setTimeout(this.getUserLocation(), 5000);
+    this.getUserLocation();
   }
 
   handleChange = event => {
@@ -38,6 +40,8 @@ class SearchBar extends Component {
 
   onSearchSubmit = async e => {
     e.preventDefault();
+    let heroImg = $('.home-hero-img');
+    heroImg.css('height', '20vh');
     let searchItem = this.state.searchItem;
     let userLocation = this.state.userLocation;
     const response = await axios.get(
@@ -62,8 +66,11 @@ class SearchBar extends Component {
     return (
       <div>
         <div className="container-fluid">
-          <div className="jumbotron">
-            <form onSubmit={this.onSearchSubmit}>
+          <div className="jumbotron home-hero-img">
+            <form
+              onSubmit={this.onSearchSubmit}
+              className="searchBar"
+              autoComplete="off">
               <div className="input-group">
                 <input
                   type="text"
@@ -87,7 +94,7 @@ class SearchBar extends Component {
                   <input
                     type="submit"
                     value="Search"
-                    className="btn btn-danger input-group-text"
+                    className="btn btn-danger input-group-text btn-custom-submit"
                   />
                 </div>
               </div>

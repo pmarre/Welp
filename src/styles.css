@@ -1,4 +1,54 @@
+.btn:focus,
+.form-control:focus {
+  outline: none;
+}
+
 .App {
   font-family: sans-serif;
   text-align: center;
+}
+
+.home-hero-img {
+  width: 100%;
+  height: 50vh;
+  transition: height 0.3s linear;
+  position: relative;
+  background-image: url(./images/home-hero.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.searchBar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+}
+
+.btn-custom-submit {
+  background-color: #ff0000;
+  color: #ffffff;
+  border: none;
+}
+
+.clickable-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+
+.clickable-card:hover {
+  cursor: pointer;
+}
+
+.photo-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 300px;
 }
