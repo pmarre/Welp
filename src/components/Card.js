@@ -33,7 +33,7 @@ class Card extends Component {
       <div
         className="col-xs-12 col-sm-6 col-lg-4 card-deck mb-3 businessCard"
         key={business.id}>
-        <div className="business-card card" style={{ width: 18 + 'rem' }}>
+        <div className="business-card card">
           <div
             className="clickable-card"
             id={business.id}
@@ -64,7 +64,7 @@ class Card extends Component {
       </div>
     ));
     return (
-      <div className="test-container">
+      <div>
         <div className="row justify-content-center">{renderList}</div>
         <DetailView ref="child" />
       </div>

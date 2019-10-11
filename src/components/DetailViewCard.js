@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import StarRatings from 'react-star-ratings';
+import axios from 'axios';
+import BusinessReviews from './BusinessReviews';
 
 class DetailViewCard extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      businessReviews: {},
+      status: false
+    };
     this.changeStatus = this.changeStatus.bind(this);
+    this.onGetReviews = this.onGetReviews.bind(this);
   }
   changeStatus = () => {
     this.props.callbackFromParent(false);
@@ -13,19 +20,41 @@ class DetailViewCard extends Component {
     $('.businessCard').css('display', 'block');
     $('.home-hero-img').css('display', 'block');
   };
+
+  onGetReviews = async id => {
+    let businessId = id;
+    const response = await axios.get(
+      `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/${businessId}/reviews`,
+      {
+        headers: {
+          Authorization:
+            'Bearer BSHoa-Ky4u-KV6x0BAMflZXlUc480GhS-AMMDw9W5TJr3QZm6bjozXdrUOM8BF7AQeT7JJnfws4GDFJK3iEk67lin_xbU7Tp8oNeeDa1YWqobPHRd82lupSr2vGIXXYx'
+        }
+      }
+    );
+    this.setState({ businessReviews: response.data, status: true });
+    console.log(this.state.businessReviews);
+  };
+
+  componentDidMount() {
+    this.onGetReviews(this.props.businessDetail.id);
+  }
+
   render() {
     let businessDetail = this.props.businessDetail;
-    console.log(this.props);
     if (businessDetail == null) {
       return null;
     }
 
     let photos = businessDetail.photos.map(photo => (
-      <div
-        key={photo}
-        style={{ backgroundImage: `url(${photo})`, backgroundSize: 'fill' }}
-      />
+      <img className="detail-images" key={photo} src={photo} alt={photo} />
     ));
+
+    let reviews;
+    if (this.state.status === true) {
+      reviews = <BusinessReviews {...this.state} />;
+    }
+
     return (
       <div className="container-fluid detail">
         <div className="photo-container">{photos}</div>
@@ -45,6 +74,7 @@ class DetailViewCard extends Component {
         <div>{businessDetail.review_count}</div>
         <div>{businessDetail.display_phone}</div>
         <div>{businessDetail.location.address1}</div>
+        {reviews}
       </div>
     );
   }
