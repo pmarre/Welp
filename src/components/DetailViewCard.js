@@ -55,6 +55,10 @@ class DetailViewCard extends Component {
       reviews = <BusinessReviews {...this.state} />;
     }
 
+    let address = businessDetail.location.display_address.map(address => (
+      <p key={address}>{address}</p>
+    ));
+
     return (
       <div className="container-fluid detail">
         <div className="photo-container">{photos}</div>
@@ -73,7 +77,7 @@ class DetailViewCard extends Component {
         />
         <div>{businessDetail.review_count}</div>
         <div>{businessDetail.display_phone}</div>
-        <div>{businessDetail.location.address1}</div>
+        <div>{address}</div>
         {reviews}
       </div>
     );
