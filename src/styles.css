@@ -58,10 +58,3 @@
   height: 100%;
   object-fit: cover;
 }
-
-#review-image {
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translate(0%, -50%);
-}

@@ -16,7 +16,7 @@ class BusinessReviews extends Component {
       reviews = businessReviews.reviews.map(review => (
         <div
           className="card mb-3"
-          style={{ maxWidth: '540px' }}
+          style={{ maxWidth: '850px' }}
           key={review.id}>
           <div className="row no-gutters">
             <div className="col-md-4">
@@ -25,10 +25,14 @@ class BusinessReviews extends Component {
                 className="card-img"
                 alt={review.user.name + 'profile picture'}
                 style={{
-                  width: '100px',
-                  height: '100px',
+                  width: '150px',
+                  height: '150px',
                   borderRadius: '50%',
-                  objectFit: 'cover'
+                  objectFit: 'cover',
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)'
                 }}
               />
             </div>
@@ -42,7 +46,7 @@ class BusinessReviews extends Component {
                   name="rating"
                   starDimension="20px"
                 />
-                <p className="card-text">
+                <p className="card-text mt-2">
                   {review.text}{' '}
                   <a
                     href={review.url}
@@ -61,7 +65,12 @@ class BusinessReviews extends Component {
       ));
     }
     console.log(this.props);
-    return <div>{reviews}</div>;
+    return (
+      <div className="review--container">
+        <h3>Reviews</h3>
+        <div>{reviews}</div>
+      </div>
+    );
   }
 }
 
