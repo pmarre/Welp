@@ -31,34 +31,50 @@ class Card extends Component {
 
     let renderList = businesses.map(business => (
       <div
-        className="col-xs-12 col-sm-6 col-lg-4 card-deck mb-3 businessCard"
-        key={business.id}>
-        <div className="business-card card">
+        className="card card-deck mb-4 businessCard pb-4"
+        key={business.id}
+        style={{
+          maxWidth: '750px',
+          border: 'none',
+          borderBottom: '1px solid gainsboro'
+        }}>
+        <div className="business-card row no-gutters">
           <div
             className="clickable-card"
             id={business.id}
             onClick={this.onClickMoreInfo}></div>
-          <img
-            src={business.image_url}
-            className="card-img-top"
-            alt={business.name}
-            style={{ width: 100 + '%', height: 15 + 'vw', objectFit: 'cover' }}
-          />
-          <div className="card-body ">
-            <h5 className="card-title">{business.name}</h5>
-            <p className="card-subtitle">{business.price}</p>
-            <StarRatings
-              rating={business.rating}
-              starRatedColor="coral"
-              numberOfStars={5}
-              name="rating"
-              starDimension="20px"
+          <div className="col-md-4">
+            <img
+              src={business.image_url}
+              className="card-img-top"
+              alt={business.name}
+              style={{
+                width: 100 + '%',
+                height: 15 + 'vw',
+                objectFit: 'cover',
+                borderRadius: '20px'
+              }}
             />
-            <p className="card-subtitle mt-1">
-              {business.review_count} reviews
-            </p>
-            <p className="card-subtitle mt-1"></p>
-            <p className="card-text">{business.location.display_address[1]}</p>
+          </div>
+          <div className="col-md-8">
+            <div className="card-body ">
+              <h5 className="card-title">{business.name}</h5>
+              <p className="card-subtitle">{business.price}</p>
+              <StarRatings
+                rating={business.rating}
+                starRatedColor="coral"
+                numberOfStars={5}
+                name="rating"
+                starDimension="20px"
+              />
+              <p className="card-subtitle mt-1">
+                {business.review_count} reviews
+              </p>
+              <p className="card-subtitle mt-1"></p>
+              <p className="card-text">
+                {business.location.display_address[1]}
+              </p>
+            </div>
           </div>
         </div>
       </div>
