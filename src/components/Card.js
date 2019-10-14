@@ -34,7 +34,7 @@ class Card extends Component {
         className="card card-deck mb-4 businessCard pb-4"
         key={business.id}
         style={{
-          maxWidth: '750px',
+          width: '100%',
           border: 'none',
           borderBottom: '1px solid gainsboro'
         }}>
@@ -56,7 +56,7 @@ class Card extends Component {
               }}
             />
           </div>
-          <div className="col-md-8">
+          <div className="col-md-5">
             <div className="card-body ">
               <h5 className="card-title">{business.name}</h5>
               <p className="card-subtitle">{business.price}</p>
@@ -70,9 +70,14 @@ class Card extends Component {
               <p className="card-subtitle mt-1">
                 {business.review_count} reviews
               </p>
+            </div>
+          </div>
+          <div className="col-md-3">
+            <div className="card-body">
               <p className="card-subtitle mt-1"></p>
+              <p className="card-text">{business.display_phone}</p>
               <p className="card-text">
-                {business.location.display_address[1]}
+                {business.location.display_address[0]}
               </p>
             </div>
           </div>
@@ -80,9 +85,13 @@ class Card extends Component {
       </div>
     ));
     return (
-      <div>
-        <div className="row justify-content-center">{renderList}</div>
-        <DetailView ref="child" />
+      <div className="row justify-content-center">
+        <div className="col-8" style={{ maxWidth: '850px' }}>
+          {renderList}
+        </div>
+        <div>
+          <DetailView ref="child" />
+        </div>
       </div>
     );
   }
