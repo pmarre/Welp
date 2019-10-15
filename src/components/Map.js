@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
-import { Map, GoogleAPIWrapper, Marker } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { googleMapsApi } from '../config';
 
 class MapContainer extends Component {
   render() {
+    let businessLatitude = this.props.businessDetail.coordinates.latitude;
+    let businessLongitude = this.props.businessDetail.coordinates.longitude;
     return (
       <Map
         google={this.props.google}
         zoom={15}
-        initialCenter={{ lat: 47.444, lng: -122.176 }}
-      />
+        style={{ width: '100%', height: '100%' }}
+        initialCenter={{ lat: businessLatitude, lng: businessLongitude }}>
+        <Marker position={{ lat: businessLatitude, lng: businessLongitude }} />
+      </Map>
     );
   }
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'API KEY'
+  apiKey: googleMapsApi
 })(MapContainer);

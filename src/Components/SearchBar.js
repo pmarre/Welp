@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import $ from 'jquery';
 import ContentContainer from '../container/ContentContainer';
+import { yelpAPI } from '../config';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -52,8 +53,7 @@ class SearchBar extends Component {
           location: userLocation
         },
         headers: {
-          Authorization:
-            'Bearer BSHoa-Ky4u-KV6x0BAMflZXlUc480GhS-AMMDw9W5TJr3QZm6bjozXdrUOM8BF7AQeT7JJnfws4GDFJK3iEk67lin_xbU7Tp8oNeeDa1YWqobPHRd82lupSr2vGIXXYx'
+          Authorization: yelpAPI
         }
       }
     );
