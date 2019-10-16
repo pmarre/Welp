@@ -66,7 +66,9 @@ class DetailViewCard extends Component {
     }
 
     let address = businessDetail.location.display_address.map(address => (
-      <p key={address}>{address}</p>
+      <p className="mb-0" key={address}>
+        {address}
+      </p>
     ));
 
     return (
@@ -84,13 +86,13 @@ class DetailViewCard extends Component {
           <div className="col-8">
             <div className="row justify-content-start">
               <div className="col-8">
-                <h1 className="heading">{businessDetail.name}</h1>
+                <h1 className="heading mb-0">{businessDetail.name}</h1>
               </div>
             </div>
 
-            <div className="row justify-content-start">
+            <div className="row justify-content-start ml-1">
               <StarRatings
-                className="col-4 "
+                className="col-4"
                 rating={businessDetail.rating}
                 starRatedColor="coral"
                 numberOfStars={5}
