@@ -4,6 +4,7 @@ import StarRatings from 'react-star-ratings';
 import axios from 'axios';
 import BusinessReviews from './BusinessReviews';
 import { yelpAPI } from '../config';
+import MapContainer from './Map';
 
 class DetailViewCard extends Component {
   constructor(props) {
@@ -72,9 +73,9 @@ class DetailViewCard extends Component {
     ));
 
     return (
-      <div className="container-fluid detail">
+      <div className="detail mt-4">
         <div className="photo-container">{photos}</div>
-        <div className="row justify-content-start">
+        <div className="row justify-content-start mt-3">
           <div className="col-1">
             <button
               className="btn btn-danger mt-2 btn--submit"
@@ -82,35 +83,41 @@ class DetailViewCard extends Component {
               Back
             </button>
           </div>
-
           <div className="col-8">
-            <div className="row justify-content-start">
-              <div className="col-8">
-                <h1 className="heading mb-0">{businessDetail.name}</h1>
-              </div>
-            </div>
-
-            <div className="row justify-content-start ml-1">
-              <StarRatings
-                className="col-4"
-                rating={businessDetail.rating}
-                starRatedColor="coral"
-                numberOfStars={5}
-                name="rating"
-                starDimension="20px"
-              />
-              <div className="col-4">
-                <span className="align-text-top">
-                  {businessDetail.review_count} reviews
-                </span>
-              </div>
-            </div>
-            <div>{businessDetail.display_phone}</div>
-            <div>{address}</div>
-            <div className="row justify-content-center">
-              <div className="col-12">{reviews}</div>
-            </div>
+            <h1 className="heading mb-0">{businessDetail.name}</h1>
           </div>
+        </div>
+
+        <div className="row justify-content-start">
+          <div className="col-10 offset-sm-1">
+            <StarRatings
+              rating={businessDetail.rating}
+              starRatedColor="coral"
+              numberOfStars={5}
+              name="rating"
+              starDimension="20px"
+            />
+            <span className="align-text-top ml-1">
+              {businessDetail.review_count} reviews
+            </span>
+          </div>
+          <div className="col-4"></div>
+        </div>
+        <div className="row">
+          <div className="col-8 offset-sm-1">
+            {businessDetail.display_phone}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-8 offset-sm-1">{address}</div>
+        </div>
+        <div className="row mt-4">
+          <div className="col-12">
+            <MapContainer {...this.props} {...this.state} />
+          </div>
+        </div>
+        <div className="row mt-4">
+          <div className="col-12">{reviews}</div>
         </div>
       </div>
     );

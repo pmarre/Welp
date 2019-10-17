@@ -11,11 +11,15 @@ class App extends Component {
     super(props);
     this.state = {
       long: null,
-      lat: null
+      lat: null,
+      status: false
     };
   }
+  componentDidMount() {
+    this.getLocation();
+  }
 
-  render() {
+  getLocation = () => {
     window.navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({
@@ -26,7 +30,9 @@ class App extends Component {
       },
       err => console.log(err)
     );
+  };
 
+  render() {
     return (
       <div className="wrapper">
         <Navigation />

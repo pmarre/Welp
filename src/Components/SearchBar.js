@@ -18,15 +18,15 @@ class SearchBar extends Component {
   }
 
   getUserLocation = () => {
-    if (this.props.lat == null || this.props.long == null) {
+    if (this.props.status === false) {
       this.setState({ userLocation: 'San Francisco, CA' });
     } else {
-      this.setState({
-        userLocation: this.props.lat + ', ' + this.props.long
-      });
+      this.setState(props => ({
+        userLocation: props.lat + ', ' + props.long
+      }));
     }
 
-    console.log(this.props.lat);
+    console.log(this.props.status);
   };
 
   componentDidMount() {
@@ -59,6 +59,7 @@ class SearchBar extends Component {
     );
 
     this.setState({ businesses: response.data.businesses });
+
     this.id = this.state.businesses.map(item => item.id);
   };
 

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import DetailViewCard from './DetailViewCard';
 import { yelpAPI } from '../config';
-import MapContainer from './Map';
 
 class DetailView extends Component {
   constructor(props) {
@@ -36,13 +35,16 @@ class DetailView extends Component {
   render() {
     if (this.props.info !== '' && this.state.show === true) {
       return (
-        <div>
-          <DetailViewCard
-            {...this.state}
-            {...this.props}
-            callbackFromParent={this.getShowStatus}
-          />
-          <MapContainer {...this.props} {...this.state} />
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-12">
+              <DetailViewCard
+                {...this.state}
+                {...this.props}
+                callbackFromParent={this.getShowStatus}
+              />
+            </div>
+          </div>
         </div>
       );
     } else {
