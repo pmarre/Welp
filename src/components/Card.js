@@ -72,8 +72,8 @@ class Card extends Component {
               </p>
             </div>
           </div>
-          <div className="col-md-3">
-            <div className="card-body">
+          <div className="col-md-3 text-right justify-content-end">
+            <div className="card-body ">
               <p className="card-subtitle mt-1"></p>
               <p className="card-text">{business.display_phone}</p>
               <p className="card-text">

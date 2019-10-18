@@ -72,6 +72,12 @@ class DetailViewCard extends Component {
       </p>
     ));
 
+    let tags = businessDetail.categories.map((tag, index) => (
+      <small className="subtitle" key={tag.alias}>
+        {(index ? ', ' : '') + tag.title}
+      </small>
+    ));
+
     return (
       <div className="detail mt-4">
         <div className="photo-container">{photos}</div>
@@ -86,6 +92,9 @@ class DetailViewCard extends Component {
           <div className="col-8">
             <h1 className="heading mb-0">{businessDetail.name}</h1>
           </div>
+        </div>
+        <div className="row">
+          <div className="col-8 offset-md-1">{tags}</div>
         </div>
 
         <div className="row justify-content-start">
