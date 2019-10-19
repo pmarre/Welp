@@ -64,6 +64,10 @@
   vertical-align: top !important;
 }
 
-.card:hover {
+.businessCard:hover {
   transform: scale(1.05);
+}
+
+.hours--list {
+  list-style: none;
 }

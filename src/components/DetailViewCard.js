@@ -78,6 +78,14 @@ class DetailViewCard extends Component {
       </small>
     ));
 
+    let businessHours = businessDetail.hours[0].open.map((hour, index) => (
+      <li key={index} className="hours--list">
+        <small>
+          {hour.start} - {hour.end}
+        </small>
+      </li>
+    ));
+
     return (
       <div className="detail mt-4">
         <div className="photo-container">{photos}</div>
@@ -92,11 +100,11 @@ class DetailViewCard extends Component {
           <div className="col-8">
             <h1 className="heading mb-0">{businessDetail.name}</h1>
           </div>
+          {/* <ul className="hour--list-group col-3">{businessHours}</ul> */}
         </div>
         <div className="row">
           <div className="col-8 offset-md-1">{tags}</div>
         </div>
-
         <div className="row justify-content-start">
           <div className="col-10 offset-sm-1">
             <StarRatings

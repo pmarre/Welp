@@ -58,8 +58,12 @@ class Card extends Component {
           </div>
           <div className="col-md-5">
             <div className="card-body ">
-              <h5 className="card-title">{business.name}</h5>
-              <p className="card-subtitle">{business.price}</p>
+              <h5 className="card-title mb-0">{business.name}</h5>
+              <div className="row">
+                <div className="col-md-5">
+                  <small className="card-subtitle">{business.price}</small>
+                </div>
+              </div>
               <StarRatings
                 rating={business.rating}
                 starRatedColor="coral"
@@ -75,7 +79,7 @@ class Card extends Component {
           <div className="col-md-3 text-right justify-content-end">
             <div className="card-body ">
               <p className="card-subtitle mt-1"></p>
-              <p className="card-text">{business.display_phone}</p>
+              <p className="card-text mb-0">{business.display_phone}</p>
               <p className="card-text">
                 {business.location.display_address[0]}
               </p>
