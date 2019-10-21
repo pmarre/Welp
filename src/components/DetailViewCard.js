@@ -78,13 +78,66 @@ class DetailViewCard extends Component {
       </small>
     ));
 
-    let businessHours = businessDetail.hours[0].open.map((hour, index) => (
-      <li key={index} className="hours--list">
-        <small>
-          {hour.start} - {hour.end}
-        </small>
-      </li>
-    ));
+    let businessHours = businessDetail.hours[0].open.map((hour, index) => {
+      switch (index) {
+        case 0:
+          return (
+            <li key={index} className="hours--list">
+              <small>
+                Sunday: {hour.start} - {hour.end}
+              </small>
+            </li>
+          );
+        case 1:
+          return (
+            <li key={index} className="hours--list">
+              <small>
+                Monday: {hour.start} - {hour.end}
+              </small>
+            </li>
+          );
+        case 2:
+          return (
+            <li key={index} className="hours--list">
+              <small>
+                Tuesday: {hour.start} - {hour.end}
+              </small>
+            </li>
+          );
+        case 3:
+          return (
+            <li key={index} className="hours--list">
+              <small>
+                Wednesday: {hour.start} - {hour.end}
+              </small>
+            </li>
+          );
+        case 4:
+          return (
+            <li key={index} className="hours--list">
+              <small>
+                Thursday: {hour.start} - {hour.end}
+              </small>
+            </li>
+          );
+        case 5:
+          return (
+            <li key={index} className="hours--list">
+              <small>
+                Friday: {hour.start} - {hour.end}
+              </small>
+            </li>
+          );
+        case 6:
+          return (
+            <li key={index} className="hours--list">
+              <small>
+                Saturday: {hour.start} - {hour.end}
+              </small>
+            </li>
+          );
+      }
+    });
 
     return (
       <div className="detail mt-4">
@@ -100,7 +153,7 @@ class DetailViewCard extends Component {
           <div className="col-8">
             <h1 className="heading mb-0">{businessDetail.name}</h1>
           </div>
-          {/* <ul className="hour--list-group col-3">{businessHours}</ul> */}
+          <ul className="hour--list-group col-3">{businessHours}</ul>
         </div>
         <div className="row">
           <div className="col-8 offset-md-1">{tags}</div>
