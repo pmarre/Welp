@@ -9,7 +9,6 @@ class DetailView extends Component {
     this.state = {
       show: false
     };
-    this.onDetailChange = this.onDetailChange.bind(this);
   }
 
   onDetailChange = async id => {

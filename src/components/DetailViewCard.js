@@ -13,8 +13,6 @@ class DetailViewCard extends Component {
       businessReviews: {},
       status: false
     };
-    this.changeStatus = this.changeStatus.bind(this);
-    this.onGetReviews = this.onGetReviews.bind(this);
   }
   changeStatus = () => {
     this.props.callbackFromParent(false);

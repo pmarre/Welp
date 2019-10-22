@@ -7,7 +7,6 @@ class Card extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.onClickMoreInfo = this.onClickMoreInfo.bind(this);
   }
 
   onClickMoreInfo = e => {

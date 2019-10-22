@@ -12,9 +12,6 @@ class SearchBar extends Component {
       userLocation: '',
       businesses: []
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.onSearchSubmit = this.onSearchSubmit.bind(this);
-    this.getUserLocation = this.getUserLocation.bind(this);
   }
 
   getUserLocation = () => {
