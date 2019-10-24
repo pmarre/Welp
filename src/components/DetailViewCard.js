@@ -134,6 +134,14 @@ class DetailViewCard extends Component {
               </small>
             </li>
           );
+        default:
+          return (
+            <li key={index} className="hours--list">
+              <small>
+                {hour.start} - {hour.end}
+              </small>
+            </li>
+          );
       }
     });
 
@@ -151,8 +159,13 @@ class DetailViewCard extends Component {
           <div className="col-8">
             <h1 className="heading mb-0">{businessDetail.name}</h1>
           </div>
-          <ul className="hour--list-group col-3">{businessHours}</ul>
         </div>
+        <div className="row">
+          <div className="col-3 offset-md-8">
+            <ul className="hour--list-group">{businessHours}</ul>
+          </div>
+        </div>
+
         <div className="row">
           <div className="col-8 offset-md-1">{tags}</div>
         </div>
