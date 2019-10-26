@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import $ from 'jquery';
 import ContentContainer from '../container/ContentContainer';
 import { yelpAPI } from '../config';
@@ -42,22 +41,30 @@ class SearchBar extends Component {
     heroImg.css('height', '20vh');
     let searchItem = this.state.searchItem;
     let userLocation = this.state.userLocation;
-    const response = await axios.get(
-      'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search',
-      {
-        params: {
-          term: searchItem,
-          location: userLocation
-        },
-        headers: {
-          Authorization: yelpAPI
-        }
+
+    let url = new URL(
+        'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search'
+      ),
+      params = {
+        term: searchItem,
+        location: userLocation
+      };
+
+    Object.keys(params).forEach(key => {
+      url.searchParams.append(key, params[key]);
+    });
+
+    fetch(url, {
+      headers: {
+        Authorization: yelpAPI
       }
-    );
+    })
+      .then(res => res.json())
+      .then(response => {
+        this.setState({ businesses: response.businesses });
 
-    this.setState({ businesses: response.data.businesses });
-
-    this.id = this.state.businesses.map(item => item.id);
+        this.id = this.state.businesses.map(item => item.id);
+      });
   };
 
   render() {

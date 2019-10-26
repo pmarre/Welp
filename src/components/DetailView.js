@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import DetailViewCard from './DetailViewCard';
 import { yelpAPI } from '../config';
 
@@ -13,16 +12,19 @@ class DetailView extends Component {
 
   onDetailChange = async id => {
     let businessId = id;
-    const response = await axios.get(
-      `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/${businessId}`,
-      {
-        headers: {
-          Authorization: yelpAPI
-        }
-      }
+    let url = new URL(
+      `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/${businessId}`
     );
-    this.setState({ businessDetail: response.data, show: true });
-    console.log(this.state.businessDetail);
+    fetch(url, {
+      headers: {
+        Authorization: yelpAPI
+      }
+    })
+      .then(res => res.json())
+      .then(response => {
+        this.setState({ businessDetail: response, show: true });
+        console.log(this.state.businessDetail);
+      });
   };
 
   getShowStatus = status => {

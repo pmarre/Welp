@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import StarRatings from 'react-star-ratings';
-import axios from 'axios';
 import BusinessReviews from './BusinessReviews';
 import { yelpAPI } from '../config';
 import MapContainer from './Map';
@@ -23,16 +22,19 @@ class DetailViewCard extends Component {
 
   onGetReviews = async id => {
     let businessId = id;
-    const response = await axios.get(
-      `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/${businessId}/reviews`,
-      {
-        headers: {
-          Authorization: yelpAPI
-        }
-      }
+    let url = new URL(
+      `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/${businessId}/reviews`
     );
-    this.setState({ businessReviews: response.data, status: true });
-    console.log(this.state.businessReviews);
+    fetch(url, {
+      headers: {
+        Authorization: yelpAPI
+      }
+    })
+      .then(res => res.json())
+      .then(response => {
+        this.setState({ businessReviews: response, status: true });
+        console.log(this.businessReviews);
+      });
   };
 
   componentDidMount() {
