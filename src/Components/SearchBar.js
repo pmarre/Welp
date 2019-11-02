@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import ContentContainer from '../container/ContentContainer';
+import FilterContainer from '../container/FilterContainer';
 import { yelpAPI } from '../config';
 
 class SearchBar extends Component {
@@ -106,6 +107,7 @@ class SearchBar extends Component {
             </form>
           </div>
         </div>
+        <FilterContainer {...this.state} />
         <ContentContainer
           {...this.state}
           onSubmit={this.onSearchSubmit.bind(this)}

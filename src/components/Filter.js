@@ -13,6 +13,11 @@ class Filter extends Component {
       case '$$$$':
         return <div>$$$$</div>;
     }
+    return (
+      <input type="button" className="btn-primary" value="$">
+        $
+      </input>
+    );
   }
 }
 
