@@ -10,7 +10,7 @@ class MapContainer extends Component {
       <Map
         google={this.props.google}
         zoom={15}
-        style={{ width: '100%', height: '300px', position: 'relative' }}
+        style={{ width: '100%', height: '344px', position: 'relative' }}
         containerStyle={{ position: 'relative' }}
         initialCenter={{ lat: businessLatitude, lng: businessLongitude }}>
         <Marker
