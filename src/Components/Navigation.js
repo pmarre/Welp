@@ -20,7 +20,7 @@ class Navigation extends Component {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <a className="nav-link" href="/">
+              <a className="nav-link">
                 Home <span className="sr-only">(current)</span>
               </a>
             </li>

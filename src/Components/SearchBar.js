@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import ContentContainer from '../container/ContentContainer';
 import FilterContainer from '../container/FilterContainer';
-import { yelpAPI } from '../config';
+import { yelpAPI, googleMapsApi } from '../config';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -18,16 +18,36 @@ class SearchBar extends Component {
     if (this.props.status === false) {
       this.setState({ userLocation: 'San Francisco, CA' });
     } else {
-      this.setState(props => ({
-        userLocation: props.lat + ', ' + props.long
-      }));
+      fetch(
+        `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.props.lat},${this.props.long}&key=${googleMapsApi}`
+      )
+        .then(res => res.json())
+        .then(response => {
+          let addresses = [];
+          let addressComponents = [];
+          response.results.map(address => addresses.push(address));
+          addresses[0].address_components.map(addComp =>
+            addressComponents.push(addComp)
+          );
+          this.setState({
+            userLocation:
+              addressComponents[2].long_name +
+              ', ' +
+              addressComponents[4].short_name,
+            status: true
+          });
+        });
     }
-
-    console.log(this.props.status);
   };
 
   componentDidMount() {
     this.getUserLocation();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.status !== this.props.status) {
+      this.getUserLocation();
+    }
   }
 
   handleChange = event => {

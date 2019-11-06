@@ -1,12 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import React, { Component } from 'react';
-
-import FilterContainer from './container/FilterContainer';
+import { Switch, Router, Route } from 'react-router-dom';
 
 import SearchBar from './components/SearchBar';
 import Navigation from './components/Navigation';
 import './styles.css';
+import FeaturedEvent from './components/FeaturedEvent';
 
 class App extends Component {
   constructor(props) {
@@ -17,11 +17,8 @@ class App extends Component {
       status: false
     };
   }
-  componentDidMount() {
-    this.getLocation();
-  }
 
-  getLocation = () => {
+  render() {
     window.navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({
@@ -32,13 +29,11 @@ class App extends Component {
       },
       err => console.log(err)
     );
-  };
-
-  render() {
     return (
       <div className="wrapper">
         <Navigation />
         <SearchBar {...this.state} />
+        <FeaturedEvent />
       </div>
     );
   }
