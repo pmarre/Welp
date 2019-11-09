@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import StarRatings from 'react-star-ratings';
 import $ from 'jquery';
 import DetailView from './DetailView';
+import { withRouter, Link } from 'react-router-dom';
 
 class Card extends Component {
   constructor(props) {
@@ -11,13 +12,14 @@ class Card extends Component {
 
   onClickMoreInfo = e => {
     let info = e.target.id;
+
     console.log(info);
-    let detail = $('.detail');
-    let hero = $('.home-hero-img');
-    let businessCard = $('.businessCard');
-    businessCard.css('display', 'none');
-    hero.css('display', 'none');
-    detail.css('display', 'block');
+    // let detail = $('.detail');
+    // let hero = $('.home-hero-img');
+    // let businessCard = $('.businessCard');
+    // businessCard.css('display', 'none');
+    // hero.css('display', 'none');
+    // detail.css('display', 'block');
     this.props.callbackFromParent(info);
     this.refs.child.onDetailChange(info);
   };
@@ -37,54 +39,56 @@ class Card extends Component {
           border: 'none',
           borderBottom: '1px solid gainsboro'
         }}>
-        <div className="business-card row no-gutters">
-          <div
-            className="clickable-card"
-            id={business.id}
-            onClick={this.onClickMoreInfo}></div>
-          <div className="col-md-4">
-            <img
-              src={business.image_url}
-              className="card-img-top"
-              alt={business.name}
-              style={{
-                width: 100 + '%',
-                height: 15 + 'vw',
-                objectFit: 'cover',
-                borderRadius: '20px'
-              }}
-            />
-          </div>
-          <div className="col-md-5">
-            <div className="card-body ">
-              <h5 className="card-title mb-0">{business.name}</h5>
-              <div className="row">
-                <div className="col-md-5">
-                  <small className="card-subtitle">{business.price}</small>
-                </div>
-              </div>
-              <StarRatings
-                rating={business.rating}
-                starRatedColor="coral"
-                numberOfStars={5}
-                name="rating"
-                starDimension="20px"
+        <Link to={`/search/${business.id}`}>
+          <div className="business-card row no-gutters">
+            <div
+              className="clickable-card"
+              id={business.id}
+              onClick={this.onClickMoreInfo}></div>
+            <div className="col-md-4">
+              <img
+                src={business.image_url}
+                className="card-img-top"
+                alt={business.name}
+                style={{
+                  width: 100 + '%',
+                  height: 15 + 'vw',
+                  objectFit: 'cover',
+                  borderRadius: '20px'
+                }}
               />
-              <p className="card-subtitle mt-1">
-                {business.review_count} reviews
-              </p>
+            </div>
+            <div className="col-md-5">
+              <div className="card-body ">
+                <h5 className="card-title mb-0">{business.name}</h5>
+                <div className="row">
+                  <div className="col-md-5">
+                    <small className="card-subtitle">{business.price}</small>
+                  </div>
+                </div>
+                <StarRatings
+                  rating={business.rating}
+                  starRatedColor="coral"
+                  numberOfStars={5}
+                  name="rating"
+                  starDimension="20px"
+                />
+                <p className="card-subtitle mt-1">
+                  {business.review_count} reviews
+                </p>
+              </div>
+            </div>
+            <div className="col-md-3 text-right justify-content-end">
+              <div className="card-body ">
+                <p className="card-subtitle mt-1"></p>
+                <p className="card-text mb-0">{business.display_phone}</p>
+                <p className="card-text">
+                  {business.location.display_address[0]}
+                </p>
+              </div>
             </div>
           </div>
-          <div className="col-md-3 text-right justify-content-end">
-            <div className="card-body ">
-              <p className="card-subtitle mt-1"></p>
-              <p className="card-text mb-0">{business.display_phone}</p>
-              <p className="card-text">
-                {business.location.display_address[0]}
-              </p>
-            </div>
-          </div>
-        </div>
+        </Link>
       </div>
     ));
     return (

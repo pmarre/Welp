@@ -3,6 +3,7 @@ import $ from 'jquery';
 import ContentContainer from '../container/ContentContainer';
 import FilterContainer from '../container/FilterContainer';
 import { yelpAPI, googleMapsApi } from '../config';
+import { withRouter } from 'react-router-dom';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class SearchBar extends Component {
               addressComponents[4].short_name,
             status: true
           });
+          this.props.passUserLocation(this.state.userLocation);
         });
     }
   };
@@ -58,6 +60,12 @@ class SearchBar extends Component {
 
   onSearchSubmit = async e => {
     e.preventDefault();
+
+    let searchTerm = this.state.searchItem.replace(' ', '+');
+    let searchLocation = this.state.userLocation.replace(' ', '+');
+    searchLocation = searchLocation.replace(',', '');
+    this.props.history.push(`/search/${searchTerm}&${searchLocation}`);
+
     let heroImg = $('.home-hero-img');
     heroImg.css('height', '20vh');
     let searchItem = this.state.searchItem;
@@ -137,4 +145,4 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);
