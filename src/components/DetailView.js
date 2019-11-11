@@ -23,7 +23,6 @@ class DetailView extends Component {
       .then(res => res.json())
       .then(response => {
         this.setState({ businessDetail: response, show: true });
-        console.log(this.state.businessDetail);
       });
   };
 

@@ -6,8 +6,6 @@ import DetailView from './components/DetailView';
 
 import './styles.css';
 
-import Home from './container/Home';
-import Search from './container/Search';
 import SearchBar from './components/SearchBar';
 import Navigation from './components/Navigation';
 import FeaturedEvent from './components/FeaturedEvent';
@@ -41,7 +39,7 @@ class App extends Component {
       },
       err => console.log(err)
     );
-    console.log(this.props);
+
     return (
       <BrowserRouter>
         <Navigation />

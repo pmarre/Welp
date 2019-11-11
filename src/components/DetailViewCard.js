@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
+
 import StarRatings from 'react-star-ratings';
 import BusinessReviews from './BusinessReviews';
 import { yelpAPI } from '../config';
@@ -18,9 +18,7 @@ class DetailViewCard extends Component {
 
   changeStatus = () => {
     this.props.callbackFromParent(false);
-    $('.detail').css('display', 'none');
-    $('.businessCard').css('display', 'block');
-    $('.home-hero-img').css('display', 'block');
+    this.props.history.goBack();
   };
 
   onGetReviews = async id => {
@@ -36,7 +34,6 @@ class DetailViewCard extends Component {
       .then(res => res.json())
       .then(response => {
         this.setState({ businessReviews: response, status: true });
-        console.log(this.businessReviews);
       });
   };
 
@@ -51,7 +48,6 @@ class DetailViewCard extends Component {
   }
 
   render() {
-    console.log(this.props);
     let businessDetail = this.props.businessDetail;
     if (businessDetail == null) {
       return null;

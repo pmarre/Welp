@@ -3,7 +3,7 @@ import $ from 'jquery';
 import ContentContainer from '../container/ContentContainer';
 import FilterContainer from '../container/FilterContainer';
 import { yelpAPI, googleMapsApi } from '../config';
-import { withRouter, Redirect, Link } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -26,15 +26,14 @@ class SearchBar extends Component {
         .then(response => {
           let addresses = [];
           let addressComponents = [];
+
           response.results.map(address => addresses.push(address));
           addresses[0].address_components.map(addComp =>
             addressComponents.push(addComp)
           );
+          let cityState = `${addressComponents[2].long_name}, ${addressComponents[4].short_name}`;
           this.setState({
-            userLocation:
-              addressComponents[2].long_name +
-              ', ' +
-              addressComponents[4].short_name,
+            userLocation: cityState,
             status: true
           });
           this.props.passUserLocation(this.state.userLocation);

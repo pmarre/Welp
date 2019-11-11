@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import StarRatings from 'react-star-ratings';
-import $ from 'jquery';
+
 import DetailView from './DetailView';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Card extends Component {
   constructor(props) {
@@ -12,14 +12,6 @@ class Card extends Component {
 
   onClickMoreInfo = e => {
     let info = e.target.id;
-
-    console.log(info);
-    // let detail = $('.detail');
-    // let hero = $('.home-hero-img');
-    // let businessCard = $('.businessCard');
-    // businessCard.css('display', 'none');
-    // hero.css('display', 'none');
-    // detail.css('display', 'block');
     this.props.callbackFromParent(info);
     this.refs.child.onDetailChange(info);
   };

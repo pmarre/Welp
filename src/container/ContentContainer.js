@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Card from '../components/Card';
-import DetailView from '../components/DetailView';
 
 class ContentContainer extends Component {
   constructor(props) {

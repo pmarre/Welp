@@ -17,7 +17,7 @@ class FeaturedEvent extends Component {
         'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/events'
       ),
       params = {
-        location: this.props.updatedUserLocation
+        location: this.props.userLocation
       };
     Object.keys(params).forEach(key => {
       url.searchParams.append(key, params[key]);
@@ -37,14 +37,14 @@ class FeaturedEvent extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    if (prevProps.updatedUserLocation !== this.props.updatedUserLocation) {
+    if (prevProps.userLocation !== this.props.userLocation) {
       this.apiCall();
     }
   }
 
   render() {
+    console.log(this.props);
     let events = this.state.events;
-    console.log(events);
     let eventCards = events.map((event, i) => (
       <div
         key={i}
@@ -53,7 +53,7 @@ class FeaturedEvent extends Component {
         <img
           src={event.image_url}
           className="card-img-top"
-          alt="..."
+          alt={event.name}
           style={{
             width: 100 + '%',
             height: 15 + 'vw',
@@ -77,7 +77,7 @@ class FeaturedEvent extends Component {
       <div className="col-10 offset-sm-1 mb-5">
         <div className="row justify-content-center mt-5 mb-3">
           <h1 className="text-center">
-            Featured Events in {this.props.updatedUserLocation}
+            Featured Events in {this.props.userLocation}
           </h1>
         </div>
         <div className="row">{eventCards}</div>
