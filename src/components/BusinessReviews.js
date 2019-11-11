@@ -64,7 +64,7 @@ class BusinessReviews extends Component {
         </div>
       ));
     }
-    console.log(this.props);
+
     return (
       <div className="review--container">
         <h3>Reviews</h3>

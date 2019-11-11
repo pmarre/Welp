@@ -3,6 +3,7 @@ import $ from 'jquery';
 import ContentContainer from '../container/ContentContainer';
 import FilterContainer from '../container/FilterContainer';
 import { yelpAPI, googleMapsApi } from '../config';
+import { withRouter, Redirect } from 'react-router-dom';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -25,17 +26,17 @@ class SearchBar extends Component {
         .then(response => {
           let addresses = [];
           let addressComponents = [];
+
           response.results.map(address => addresses.push(address));
           addresses[0].address_components.map(addComp =>
             addressComponents.push(addComp)
           );
+          let cityState = `${addressComponents[2].long_name}, ${addressComponents[4].short_name}`;
           this.setState({
-            userLocation:
-              addressComponents[2].long_name +
-              ', ' +
-              addressComponents[4].short_name,
+            userLocation: cityState,
             status: true
           });
+          this.props.passUserLocation(this.state.userLocation);
         });
     }
   };
@@ -56,8 +57,22 @@ class SearchBar extends Component {
     this.setState(change);
   };
 
+  redirectRouter = () => {
+    this.props.history.push(`/search`);
+    return <Redirect to="/search" />;
+  };
+
   onSearchSubmit = async e => {
     e.preventDefault();
+    this.redirectRouter();
+    let searchTerm = this.state.searchItem.replace(' ', '+');
+    let searchLocation = this.state.userLocation.replace(' ', '+');
+    searchLocation = searchLocation.replace(',', '');
+    this.props.history.push({
+      pathname: 'search',
+      search: `term =${searchTerm}&amp;location=${searchLocation}`
+    });
+
     let heroImg = $('.home-hero-img');
     heroImg.css('height', '20vh');
     let searchItem = this.state.searchItem;
@@ -128,13 +143,10 @@ class SearchBar extends Component {
           </div>
         </div>
         <FilterContainer {...this.state} />
-        <ContentContainer
-          {...this.state}
-          onSubmit={this.onSearchSubmit.bind(this)}
-        />
+        <ContentContainer {...this.state} onSubmit={this.onSearchSubmit} />
       </div>
     );
   }
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);

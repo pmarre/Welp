@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
+
 import StarRatings from 'react-star-ratings';
 import BusinessReviews from './BusinessReviews';
 import { yelpAPI } from '../config';
 import MapContainer from './Map';
+
+// Needs to get ID from URL since implementing react-router
 
 class DetailViewCard extends Component {
   constructor(props) {
@@ -13,11 +15,10 @@ class DetailViewCard extends Component {
       status: false
     };
   }
+
   changeStatus = () => {
     this.props.callbackFromParent(false);
-    $('.detail').css('display', 'none');
-    $('.businessCard').css('display', 'block');
-    $('.home-hero-img').css('display', 'block');
+    this.props.history.goBack();
   };
 
   onGetReviews = async id => {
@@ -33,22 +34,17 @@ class DetailViewCard extends Component {
       .then(res => res.json())
       .then(response => {
         this.setState({ businessReviews: response, status: true });
-        console.log(this.businessReviews);
       });
   };
 
   componentDidMount() {
     this.onGetReviews(this.props.businessDetail.id);
-    let btn = $('.btn--submit');
-    $(document).ready(function() {
-      btn.on('scroll', e => {
-        if (this.scrollTop > 200) {
-          btn.addClass('position-fixed');
-        } else {
-          btn.removeClass('position-fixed');
-        }
-      });
-    });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.businessDetail.id !== this.props.businessDetail.id) {
+      this.onGetReviews(this.props.businessDetail.id);
+    }
   }
 
   render() {
