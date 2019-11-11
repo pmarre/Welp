@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import Card from '../components/Card';
-import DetailView from '../components/DetailView';
 
-class ContentContainer extends Component {
+import Navigation from '../components/Navigation';
+import SearchBar from '../components/SearchBar';
+import Card from '../components/Card';
+
+class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,10 +27,10 @@ class ContentContainer extends Component {
   };
 
   render() {
-    let businesses = this.props.businesses;
-    if (businesses == null) {
-      return null;
-    }
+    // let businesses = this.props.businesses;
+    // if (businesses == null) {
+    //   return null;
+    // }
     return (
       <div className="container-fluid justify-content-center">
         <Card
@@ -40,4 +42,4 @@ class ContentContainer extends Component {
   }
 }
 
-export default ContentContainer;
+export default Search;

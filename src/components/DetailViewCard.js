@@ -5,6 +5,8 @@ import BusinessReviews from './BusinessReviews';
 import { yelpAPI } from '../config';
 import MapContainer from './Map';
 
+// Needs to get ID from URL since implementing react-router
+
 class DetailViewCard extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +15,7 @@ class DetailViewCard extends Component {
       status: false
     };
   }
+
   changeStatus = () => {
     this.props.callbackFromParent(false);
     $('.detail').css('display', 'none');
@@ -39,19 +42,16 @@ class DetailViewCard extends Component {
 
   componentDidMount() {
     this.onGetReviews(this.props.businessDetail.id);
-    let btn = $('.btn--submit');
-    $(document).ready(function() {
-      btn.on('scroll', e => {
-        if (this.scrollTop > 200) {
-          btn.addClass('position-fixed');
-        } else {
-          btn.removeClass('position-fixed');
-        }
-      });
-    });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.businessDetail.id !== this.props.businessDetail.id) {
+      this.onGetReviews(this.props.businessDetail.id);
+    }
   }
 
   render() {
+    console.log(this.props);
     let businessDetail = this.props.businessDetail;
     if (businessDetail == null) {
       return null;

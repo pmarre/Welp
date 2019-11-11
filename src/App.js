@@ -1,14 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Router, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import DetailView from './components/DetailView';
 
+import './styles.css';
+
+import Home from './container/Home';
+import Search from './container/Search';
 import SearchBar from './components/SearchBar';
 import Navigation from './components/Navigation';
-import './styles.css';
 import FeaturedEvent from './components/FeaturedEvent';
-import DetailViewCard from './components/DetailViewCard';
 import ContentContainer from './container/ContentContainer';
 
 class App extends Component {
@@ -43,22 +45,36 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Navigation />
-        <SearchBar {...this.state} passUserLocation={this.getUserLocation} />
         <Switch>
           <Route
             exact
             path="/"
             render={props => (
-              <FeaturedEvent
-                {...props}
-                userLocation={this.state.userLocation}
-              />
+              <div>
+                <SearchBar
+                  {...this.props}
+                  {...this.state}
+                  passUserLocation={this.getUserLocation}
+                />
+                <FeaturedEvent {...this.props} {...this.state} />
+              </div>
             )}
           />
-          <Route exact path="/search/:id" />
-          <Route path="/search/:id">
-            <DetailView info="test" ref="sibling" />
-          </Route>
+          <Route
+            exact
+            path="/search"
+            render={props => (
+              <div>
+                <SearchBar
+                  {...this.props}
+                  {...this.state}
+                  passUserLocation={this.getUserLocation}
+                />
+                <ContentContainer {...this.props} {...this.state} />
+              </div>
+            )}
+          />
+          <Route path="/search/:id" component={DetailView} />
         </Switch>
       </BrowserRouter>
     );

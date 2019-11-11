@@ -17,7 +17,7 @@ class FeaturedEvent extends Component {
         'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/events'
       ),
       params = {
-        location: this.props.userLocation
+        location: this.props.updatedUserLocation
       };
     Object.keys(params).forEach(key => {
       url.searchParams.append(key, params[key]);
@@ -37,7 +37,7 @@ class FeaturedEvent extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    if (prevProps.userLocation !== this.props.userLocation) {
+    if (prevProps.updatedUserLocation !== this.props.updatedUserLocation) {
       this.apiCall();
     }
   }
@@ -77,7 +77,7 @@ class FeaturedEvent extends Component {
       <div className="col-10 offset-sm-1 mb-5">
         <div className="row justify-content-center mt-5 mb-3">
           <h1 className="text-center">
-            Featured Events in {this.props.userLocation}
+            Featured Events in {this.props.updatedUserLocation}
           </h1>
         </div>
         <div className="row">{eventCards}</div>

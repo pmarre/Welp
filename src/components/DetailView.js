@@ -27,6 +27,15 @@ class DetailView extends Component {
       });
   };
 
+  componentDidMount() {
+    if (
+      Object.entries(this.props).length !== 0 &&
+      this.props.constructor === Object
+    ) {
+      this.onDetailChange(this.props.match.params.id);
+    }
+  }
+
   getShowStatus = status => {
     this.setState({
       show: status

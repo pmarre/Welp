@@ -3,7 +3,7 @@ import $ from 'jquery';
 import ContentContainer from '../container/ContentContainer';
 import FilterContainer from '../container/FilterContainer';
 import { yelpAPI, googleMapsApi } from '../config';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect, Link } from 'react-router-dom';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -58,13 +58,21 @@ class SearchBar extends Component {
     this.setState(change);
   };
 
+  redirectRouter = () => {
+    this.props.history.push(`/search`);
+    return <Redirect to="/search" />;
+  };
+
   onSearchSubmit = async e => {
     e.preventDefault();
-
+    this.redirectRouter();
     let searchTerm = this.state.searchItem.replace(' ', '+');
     let searchLocation = this.state.userLocation.replace(' ', '+');
     searchLocation = searchLocation.replace(',', '');
-    this.props.history.push(`/search/${searchTerm}&${searchLocation}`);
+    this.props.history.push({
+      pathname: 'search',
+      search: `term =${searchTerm}&amp;location=${searchLocation}`
+    });
 
     let heroImg = $('.home-hero-img');
     heroImg.css('height', '20vh');
@@ -136,10 +144,7 @@ class SearchBar extends Component {
           </div>
         </div>
         <FilterContainer {...this.state} />
-        <ContentContainer
-          {...this.state}
-          onSubmit={this.onSearchSubmit.bind(this)}
-        />
+        <ContentContainer {...this.state} onSubmit={this.onSearchSubmit} />
       </div>
     );
   }
