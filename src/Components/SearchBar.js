@@ -142,7 +142,6 @@ class SearchBar extends Component {
             </form>
           </div>
         </div>
-        <FilterContainer {...this.state} />
         <ContentContainer {...this.state} onSubmit={this.onSearchSubmit} />
       </div>
     );

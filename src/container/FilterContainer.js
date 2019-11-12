@@ -16,6 +16,7 @@ class FilterContainer extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div className="container-fluid mb-5">
         <div className="btn-group" role="group" aria-label="filters">
