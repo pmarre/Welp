@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Card from '../components/Card';
-import FilterContainer from './FilterContainer';
 
 class ContentContainer extends Component {
   constructor(props) {
@@ -32,7 +31,6 @@ class ContentContainer extends Component {
     }
     return (
       <div className="container-fluid justify-content-center">
-        <FilterContainer {...this.props} {...this.state} />
         <Card
           businesses={this.props.businesses}
           callbackFromParent={this.getBusinessId}
